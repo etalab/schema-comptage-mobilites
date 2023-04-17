@@ -4,7 +4,7 @@ Spécifications du fichier d'échange relatif aux comptages des mobilités
 
 Le schéma de comptage des mobilités est structuré en trois notions distinctes : les sites, les channels, et les mesures.
 Chacune de ces notions est retranscrite dans son propre fichier :
-les sites vont dans un fichier “sites.csv” avec une ligne par site les channels dans un fichier “channels.csv” (idem), les mesures dans un fichier “measures.csv” (idem).
+les sites vont dans un fichier `sites.csv` avec une ligne par site les channels dans un fichier `channels.csv` (idem), les mesures dans un fichier `measures.csv` (idem).
 Chaque entité a son propre fichier. Ces fichiers s’articulent entre eux grâce à des identifiants.
 
 
@@ -29,15 +29,18 @@ La base présente plusieurs cas d’usage : elle recense les sites de comptage d
 
 ## Format de fichier
 
-Les jeux de données seront publiés au format CSV UTF8 avec séparateur virgule ",". Certains champs sont obligatoires et d'autres optionnels. Les champs obligatoires doivent être complétés. Les champs optionnels peuvent être vides si la donnée n’est pas disponible. La colonne doit toutefois être présente.
+Les jeux de données seront publiés au format CSV UTF-8 avec séparateur virgule ",". Certains champs sont obligatoires et d'autres optionnels. Les champs obligatoires doivent être complétés. Les champs optionnels peuvent être vides si la donnée n’est pas disponible. La colonne doit toutefois être présente.
 
 ## Publication
 
-Dans le but de maintenir à jour un répertoire des compteurs de vélos en France, les collectivités sont invitées à transmettre systématiquement les données relatives aux compteurs sur leur territoire. Elles peuvent ajouter le mot-clef "comptage-mobilites" lors de la publication du jeu de données dans leur espace de publication (portail local ou régional) ou directement sur data.gouv.fr. Les producteurs pourront :
+Dans le but de maintenir à jour un répertoire des compteurs de vélos en France, les collectivités sont invitées à transmettre systématiquement les données relatives aux compteurs sur leur territoire. Elles peuvent ajouter le mot-clef `comptage-mobilites` lors de la publication du jeu de données dans leur espace de publication (portail local ou régional) ou directement sur data.gouv.fr.
+
+Les producteurs pourront :
 
 - publier directement sur data.gouv.fr ;
 - publier sur un portail local ou régional et s'assurer que les données publiées sont bien moissonnées et référencées sur data.gouv.fr.
-Nous préconisons aux producteurs de données de publier leurs fichiers avec la règle de nommage suivante : comptagemobilites_nom.csv avec nom étant le nom de la collectivité productrice des données, par exemple comptagemobilite_Baix.csv.
+- 
+Nous préconisons aux producteurs de données de publier leurs fichiers avec la règle de nommage suivante : `comptagemobilites_nom.csv` avec nom étant le nom de la collectivité productrice des données, par exemple `comptagemobilite_baix.csv`.
 
 Nous recommandons également de publier les trois fichiers dans un même jeu de données et de [préciser le schéma auquel chaque ressource fait référence](https://doc.transport.data.gouv.fr/producteurs/comment-et-pourquoi-les-producteurs-de-donnees-utilisent-ils-le-pan/publier-un-jeu-de-donnees#3-preciser-a-quel-schema-les-donnees-font-reference-pour-les-donnees-basees-sur-un-schema-national).  
 
@@ -55,11 +58,10 @@ Nous tenons à remercier les membres du groupe de travail pour leur investisseme
 
 
 ## Fichiers d'exemple
-Trois fichiers d'exemples sont fournis pour ce schéma :
+Des fichiers d'exemples sont fournis pour ce schéma :
 
-- un fichier d'exemple "exemple-valide.csv" avec tous les champs remplis ;
-- un fichier d'exemple "exemple-valide-eco-compteur.csv" élaboré par Eco-Compteur dont certaines valeurs optionnelles ne sont pas renseignées ;
-- un fichier d'exemple invalide "exemple-invalide" qui contient des erreurs pour le fichier "channel". Il contient des erreurs dans les champs "mobility_type" et "channel_id". 
+- un fichier d'exemple `exemple-valide.csv` avec tous les champs remplis ;
+- un fichier d'exemple `exemple-valide-eco-compteur.csv` élaboré par Eco-Compteur dont certaines valeurs optionnelles ne sont pas renseignées
 
 ## Notes techniques pour contribuer à ce schéma
 
@@ -70,12 +72,9 @@ Ce schéma s'appuie sur [TableSchema](https://specs.frictionlessdata.io/table-sc
 Ce dépôt contient un ensemble de fichiers utiles pour un dépôt d'un schéma [Table Schema](https://specs.frictionlessdata.io/table-schema/).
 
 - `CHANGELOG.md` contient la liste des changements entre les différentes versions du schéma ;
-- `exemple-valide.csv` est un fichier CSV d'exemple conforme par rapport au schéma décrit dans `schema.json`  ;
-- `exemple-valide.xlsx` est un fichier XLSX d'exemple conforme par rapport au schéma décrit dans `schema.json` ;
 - `LICENSE.md` est le fichier de licence du dépôt ;
 - `README.md` est le fichier que vous lisez actuellement ;
-- `requirements.txt` liste les dépendances Python nécessaires pour effectuer des tests en intégration continue sur le dépôt ;
-- `schema.json` est le schéma au format Table Schema.
+- `requirements.txt` liste les dépendances Python nécessaires pour effectuer des tests en intégration continue sur le dépôt.
 
 ### Intégration continue
 
@@ -84,35 +83,4 @@ Ce dépôt est configuré pour utiliser de l'intégration continue, si vous util
 - que votre schéma est valide à la spécification Table Schema ;
 - que vos fichiers d'exemples sont conformes au schéma.
 
-Vous pouvez consulter la configuration utilisée dans `.github/workflows/test.yml`.
-
-### Test en local
-
-Pour itérer plus facilement sur le schéma en local, il est possible de lancer les tests sur un poste de travail.
-
-Nous recommandons, pour installer la bonne version de Python, l'utilisation de [PyEnv](https://github.com/pyenv/pyenv) pour Mac/Linux et [pyenv-win](https://github.com/pyenv-win/pyenv-win) pour Windows.
-
-Voici la procédure à suivre pour installer l'environnement de test (sous Mac/Linux) et lancer les tests :
-
-```bash
-# Installation de la version de Python en vigueur avec pyenv
-# voir https://github.com/pyenv/pyenv
-pyenv install
-python --version
-
-# Installation des dépendances
-pip install -r requirements.txt
-
-# Test de la validité du schéma
-frictionless validate --type schema schema.json
-
-# Test de la conformité des fichiers d'exemples
-frictionless validate --schema schema.json exemple-valide.csv
-# retour positif
-
-# Test de la conformité des fichiers d'exemples
-frictionless validate --schema schema.json exemple-valide-eco-compteur.csv
-# retour positif
-
-```
-
+Vous pouvez consulter la configuration utilisée dans [`.github/workflows/test.yml`](.github/workflows/test.yml).
