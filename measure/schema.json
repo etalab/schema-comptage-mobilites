@@ -97,9 +97,11 @@
       {
          "name": "count",
          "description": "Nombre de passages comptabilisés sur la période considérée. Lorsqu'il n'y a pas eu de passage, renseigner la valeur 0. Si il n'y a aucun comptage, laisser le champ vide. Il est possible de renseigner un nombre à virgule si le chiffre est le résultat d'un calcul (interpolation, moyenne pour compléter des données abîmées ou extrapolées sur des périodes de temps différentes, mais en souhaitant conserver une justesse statistique globale). Si le champ `mobility_type` est multivalué pour le channel correspondant le fichier `channel`, il est rappelé que le `count` sera la somme des pratiques enregistrées. Pour suivre les pratiques différemment, il faut créer un channel par pratique.",
-         "example": "20",
+         "example": 20,
          "type": "number",
-         "required": false
+         "constraints": {
+            "required": false
+         }
       }
    ]
 }

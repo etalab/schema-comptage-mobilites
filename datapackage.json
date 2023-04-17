@@ -1,7 +1,7 @@
 {
     "name": "datapackage-comptage-mobilites",
     "title": "Comptage des mobilités",
-    "description": "data package contenant 3 schémas : site, channel, measure",
+    "description": "Data package contenant 3 schémas : site, channel, measure",
     "id": "datapackage-comptage-mobilites",
     "resources": [
         {
