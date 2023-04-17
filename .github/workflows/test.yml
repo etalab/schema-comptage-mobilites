@@ -7,13 +7,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Installation Python 3.10
-      uses: actions/setup-python@v1
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
     - name: Cache pip
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -25,12 +24,18 @@ jobs:
     - name: Vérification du schéma site et des fichiers d'exemples associés
       run: |
         frictionless validate --type schema site/schema.json
+        frictionless validate --schema site/schema.json site/exemple-valide.csv
+        frictionless validate --schema site/schema.json site/exemple-valide-eco-compteur.csv
     - name: Vérification du schéma channel et des fichiers d'exemples associés
       run: |
         frictionless validate --type schema channel/schema.json
+        frictionless validate --schema channel/schema.json channel/exemple-valide.csv
+        frictionless validate --schema channel/schema.json channel/exemple-valide-eco-compteur.csv
     - name: Vérification du schéma measure et des fichiers d'exemples associés
       run: |
         frictionless validate --type schema measure/schema.json
+        frictionless validate --schema measure/schema.json measure/exemple-valide.csv
+        frictionless validate --schema measure/schema.json measure/exemple-valide-eco-compteur.csv
     - name: Vérification du datapackage
       run: |
         frictionless validate datapackage.json
