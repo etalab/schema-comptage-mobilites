@@ -29,7 +29,7 @@
       }
    ],
    "created": "2021-11-15",
-   "lastModified": "2023-05-15",
+   "lastModified": "2025-01-25",
    "version": "0.2.4",
    "contributors": [
       {
@@ -101,6 +101,16 @@
          "type": "number",
          "constraints": {
             "required": false
+         }
+      },
+      {
+         "name": "status",
+         "description": "Statuts de la donnée. Le processus de validation de données garantit l'exactitude et la fiabilité des données issues des systèmes de comptage. Il permet d'identifier et de corriger des anomalies (absence de données, pic ou baisse de fréquentation) dans les séries de données. Le statut associé à la donnée de comptage est l'indicateur permettant de savoir l'état de la donnée. Choix multiple possible avec chaque valeur séparée par une virgule (mais dans ce cas il est impératif d'entourer la totalité de la cellule par des guillemets).",
+         "example": "RAW,VALIDATED",
+         "type": "string",
+         "constraints": {
+            "required": false,
+            "pattern": "(?:(?:^|,)(RAW|DELETED|MODIFIED|VALIDATED|INVALIDATED))+$"
          }
       }
    ]
