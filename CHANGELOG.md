@@ -2,7 +2,7 @@
 
 Ce fichier répertorie les changements entre différentes versions d'un schéma.
 
-## Version next 0.2.5 (non publiée)
+## Version 0.2.5 du 2025-12-22
 
 Passage du champ `temporality`, qui était un champ obligatoire, en champ optionnel dans le sous-schéma channel.
 
